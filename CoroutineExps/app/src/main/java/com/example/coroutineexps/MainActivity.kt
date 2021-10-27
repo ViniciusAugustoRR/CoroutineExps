@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
 
         //CASO O JOB AINDA NÃO TENHA SIDO INICIADO
         if(start_job_button.text == STARTJOB) {
+            actv_tv_name.visibility = View.INVISIBLE
             showToast("JOB FOI INICIADO")
             start_job_button.text = CANCELJOB
 
@@ -90,6 +91,8 @@ class MainActivity : AppCompatActivity() {
 
             if(text == CANCELADO){
                 loading_panel.visibility = View.INVISIBLE
+                actv_tv_name.visibility = View.INVISIBLE
+                start_job_button.text = STARTJOB
                 showToast("JOB FOI CANCELADO")
             }
 
@@ -100,7 +103,7 @@ class MainActivity : AppCompatActivity() {
         job_status.text = EM_PROGRESSO
 
         jobPrintNome = Job()
-        jobPrintNome.invokeOnCompletion {
+        /*jobPrintNome.invokeOnCompletion {
             it?.message.let {
                 var msg = it
                 if(!msg.isNullOrBlank()){
@@ -110,14 +113,14 @@ class MainActivity : AppCompatActivity() {
 
                 showToast(msg)
             }
-        }
+        }*/
     }
 
     fun resetJob(){
         if(jobPrintNome.isActive || jobPrintNome.isCompleted){
             jobPrintNome.cancel(CancellationException("RESETANDO O JOB"))
-        }
 
+        }
         initJob()
     }
 
